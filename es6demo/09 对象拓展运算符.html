@@ -1,0 +1,13 @@
+<script>
+     //1 对象复制
+     let person1 = {"name":"lucy","age":20}
+     let person2 = {...person1}
+     //console.log(person2)   //Uncaught SyntaxError: Unexpected token ...
+     //注意这里的代码本身没有问题，es6的代码浏览器兼容性不好，在低版本的浏览器中会出现这个错误
+
+     //2 对象合并
+     let name = {name:'mary'}
+     let age = {age:30}
+     let p2 = {...name,...age}
+     console.log(p2)
+</script>
