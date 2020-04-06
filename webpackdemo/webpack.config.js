@@ -4,14 +4,13 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, './dest'), //输出路径，__dirname：当前文件所在路径
         filename: 'bundle.js' //输出文件
+    },
+    module: {
+        rules: [  
+            {  
+                test: /\.css$/,    //打包规则应用到以css结尾的文件上
+                use: ['style-loader', 'css-loader']
+            }  
+        ]  
     }
-    // },
-    // module: {
-    //     rules: [  
-    //         {  
-    //             test: /\.css$/,    //打包规则应用到以css结尾的文件上
-    //             use: ['style-loader', 'css-loader']
-    //         }  
-    //     ]  
-    // }
 }
