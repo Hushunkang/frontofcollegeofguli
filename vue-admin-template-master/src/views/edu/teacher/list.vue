@@ -80,7 +80,7 @@
 
 <script>
 //引入要被调用的teacher.js文件
-import teacher from '@/api/edu/teacher/teacher'
+import teacherApi from '@/api/edu/teacher/teacher'
 export default {
     //核心代码位置
     // data:{
@@ -103,7 +103,7 @@ export default {
         //讲师列表
         getList(current = 1){//给current这个变量设置一个默认值为1，前端不传current默认就是1，传了current就给它赋值给this.current，因此这里的current并不是表示该方法的形参
             this.current = current;
-            teacher.pageTeacherCondition(this.current,this.size,this.teacherQuery)
+            teacherApi.pageTeacherCondition(this.current,this.size,this.teacherQuery)
             //response表示后端接口返回的数据
             .then(response => {
                 // console.log(response)
@@ -134,7 +134,7 @@ export default {
             })
             .then(() => {//点击确定，执行then方法
                 //调用删除的方法
-                teacher.removeTeacher(id)
+                teacherApi.removeTeacher(id)
                     .then(response => {//删除成功
                     //提示信息
                     this.$message({
