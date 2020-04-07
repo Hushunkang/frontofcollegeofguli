@@ -46,7 +46,17 @@ export default {
     }
   },
   created(){
-
+    //预备知识点：在JavaScript语言中，所有的变量都可以作为一个boolean类型的变量去使用
+    //判断请求路径中是否有id，没有就是添加，有就是修改
+      if(this.$route.params && this.$route.params.id) {//路径有id，修改
+          //从请求路径获取id
+          const id = this.$route.params.id
+          //根据id查询讲师数据，编辑数据前回显使用
+          this.getTeacherInfo(id)
+      } else {//路径没有id，添加
+        //清空表单（原理：vue的双向绑定）
+        this.teacher = {}
+      }
   },
   methods:{
     saveOrUpdate(){
@@ -71,8 +81,23 @@ export default {
           this.$router.push({path:'/teacher/table'})
         })
     },
+    getTeacherInfo(id){
+      teacherApi.getTeacherById(id)
+      .then(response => {
+          this.teacher = response.data.teacher
+        })
+    },
     updateTeacher(){
-
+      teacherApi.updateTeacherInfo(this.teacher)
+      .then(response => {
+          //提示信息
+          this.$message({
+              type: 'success',
+              message: '修改成功！'
+          });
+          //路由跳转，回到讲师列表页面
+          this.$router.push({path:'/teacher/table'})
+        })
     }
   }
 }

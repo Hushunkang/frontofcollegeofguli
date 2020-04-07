@@ -34,9 +34,7 @@
 </el-form>
 <!-- 表格 -->
 <el-table
-  v-loading="listLoading"
   :data="list"
-  element-loading-text="数据加载中"
   border
   fit
   highlight-current-row>
@@ -59,7 +57,7 @@
   <el-table-column prop="sort" label="排序" width="60"/>
   <el-table-column label="操作" width="200" align="center">
     <template slot-scope="scope">
-      <router-link :to="'/edu/teacher/edit/'+scope.row.id">
+      <router-link :to="'/teacher/edit/'+scope.row.id">
         <el-button type="primary" size="mini" icon="el-icon-edit">修改</el-button>
       </router-link>
       <el-button type="danger" size="mini" icon="el-icon-delete" @click="removeDataById(scope.row.id)">删除</el-button>

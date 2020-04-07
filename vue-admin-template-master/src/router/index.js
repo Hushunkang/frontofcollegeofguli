@@ -55,7 +55,14 @@ export const constantRouterMap = [
         name: '录入讲师',
         component: () => import('@/views/edu/teacher/save'),
         meta: { title: '录入讲师', icon: 'form' }
-      }
+      },
+      {
+        path: 'edit/:id',//id这种写法类似于早期原生jdbc的那个sql里面占位符的写法（底层使用PreparedStatement对象操作这种sql）
+        name: '编辑讲师',
+        component: () => import('@/views/edu/teacher/save'),
+        meta: { title: '编辑讲师', icon: 'form' },
+        hidden: true
+      }//这种操作叫隐藏路由，说白了就是前端中隐藏的菜单
     ]
   },
 
