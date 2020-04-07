@@ -46,8 +46,17 @@ export default {
     }
   },
   created(){
-    //预备知识点：在JavaScript语言中，所有的变量都可以作为一个boolean类型的变量去使用
-    //判断请求路径中是否有id，没有就是添加，有就是修改
+    this.init()
+  },
+  watch:{//vue路由监听
+    $route(to,from){//to和from表示路由变化的方式，一旦路由发生变化，这个方法就会执行，说白了就是菜单变了这个方法就被触发
+      this.init()
+    }
+  },
+  methods:{
+    init(){
+      //预备知识点：在JavaScript语言中，所有的变量都可以作为一个boolean类型的变量去使用
+      //判断请求路径中是否有id，没有就是添加，有就是修改
       if(this.$route.params && this.$route.params.id) {//路径有id，修改
           //从请求路径获取id
           const id = this.$route.params.id
@@ -57,8 +66,7 @@ export default {
         //清空表单（原理：vue的双向绑定）
         this.teacher = {}
       }
-  },
-  methods:{
+    },
     saveOrUpdate(){
       //根据teacher是否带有id来判断是添加还是修改
       if(!this.teacher.id) {
