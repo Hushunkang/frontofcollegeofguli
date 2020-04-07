@@ -1,7 +1,7 @@
 <template>
-  <div class="app-container">
+<div class="app-container">
       讲师列表
-      <!-- 表格 -->
+<!-- 表格 -->
 <el-table
   v-loading="listLoading"
   :data="list"
@@ -14,7 +14,7 @@
     width="70"
     align="center">
     <template slot-scope="scope">
-      {{ (current - 1) * size + scope.$index + 1 }}
+      {{ (current - 1) * size + scope.$index + 1 }}<!-- 这里的scope表示这个表格对象 -->
     </template>
   </el-table-column>
   <el-table-column prop="name" label="名称" width="80"/>
@@ -35,7 +35,16 @@
     </template>
   </el-table-column>
 </el-table>
-  </div>
+<!-- 分页 -->
+ <el-pagination
+   :current-page="current"
+   :page-size="size"
+   :total="total"
+   style="padding: 30px 0; text-align: center;"
+   layout="total, prev, pager, next, jumper"
+   @current-change="getList"
+ />
+</div>
 </template>
 
 <script>
@@ -61,7 +70,8 @@ export default {
     },
     methods:{//创建具体的方法，调用teacher.js中定义的方法
         //讲师列表
-        getList(){
+        getList(current = 1){//给current这个变量设置一个默认值为1，前端不传current默认就是1，传了current就给它赋值给this.current，因此这里的current并不是表示该方法的形参
+            this.current = current;
             teacher.pageTeacherCondition(this.current,this.size,this.teacherQuery)
             //response表示后端接口返回的数据
             .then(response => {
