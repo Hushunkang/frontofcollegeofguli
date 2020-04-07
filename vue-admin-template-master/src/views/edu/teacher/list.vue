@@ -44,8 +44,8 @@
     label="序号"
     width="70"
     align="center">
-    <template slot-scope="scope">
-      {{ (current - 1) * size + scope.$index + 1 }}<!-- 这里的scope表示这个表格对象 -->
+    <template slot-scope="scope"><!-- 显示记录的序号 -->
+      {{ (current - 1) * size + scope.$index + 1 }}<!-- 这里的scope对象表示这个表格对象 -->
     </template>
   </el-table-column>
   <el-table-column prop="name" label="名称" width="80"/>
@@ -112,9 +112,10 @@ export default {
                 this.total = response.data.total
                 console.log(this.total)
             })//axios发送ajax请求后请求成功
-            .catch(error => {
-                console.log(error)
-            })//axios发送ajax请求后请求失败
+            // .catch(error => {
+            //     console.log(error)
+            // })//axios发送ajax请求后请求失败
+            //说明：catch建议统一都不写，框架底层做了失败后做的事情，你这里再写一次可能有些浏览器会出现问题，详情看import request from '@/utils/request'源码
         },
         //清空功能
         resetData() {
@@ -125,23 +126,28 @@ export default {
         },
         //删除讲师的方法
         removeDataById(id) {
-            this.$confirm('此操作将永久删除讲师记录, 是否继续?', '提示', {
+            //从用户体验角度出发，加一个友好性的提示，怕用户误操作直接删掉了记录
+            this.$confirm('此操作将永久删除讲师记录，是否继续？','提示',{
                 confirmButtonText: '确定',
                 cancelButtonText: '取消',
                 type: 'warning'
-            }).then(() => {  //点击确定，执行then方法
+            })
+            .then(() => {//点击确定，执行then方法
                 //调用删除的方法
-                teacher.deleteTeacherId(id)
-                    .then(response =>{//删除成功
+                teacher.removeTeacher(id)
+                    .then(response => {//删除成功
                     //提示信息
                     this.$message({
                         type: 'success',
-                        message: '删除成功!'
+                        message: '删除成功！'
                     });
-                    //回到列表页面
+                    //回到讲师列表页面
                     this.getList()
                 })
-            }) //点击取消，执行catch方法
+            })
+            // .catch(() => {//点击取消，执行catch方法
+
+            // })
         }
     }
 }

@@ -14,6 +14,13 @@ export default{
             //否则后端获取不到数据，data表示把条件对象转换为json数据格式然后传递到后端接口里面
             data: teacherQuery
           })
+    },
+    //逻辑删除讲师
+    removeTeacher(id){
+        return request({
+            url: `/eduservice/teacher/removeTeacher/${id}`,
+            method: 'delete'
+          })
     }
 
 }
