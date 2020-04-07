@@ -5,14 +5,12 @@
 <el-form-item>
 <el-input v-model="teacherQuery.name" placeholder="讲师名"/>
 </el-form-item>
-
 <el-form-item>
 <el-select v-model="teacherQuery.level" clearable placeholder="讲师头衔">
     <el-option :value="1" label="高级讲师"/>
     <el-option :value="2" label="首席讲师"/>
 </el-select>
 </el-form-item>
-
 <el-form-item label="添加时间">
 <el-date-picker
     v-model="teacherQuery.begin"
@@ -31,7 +29,6 @@
     default-time="00:00:00"
 />
 </el-form-item>
-
 <el-button type="primary" icon="el-icon-search" @click="getList()">查询</el-button>
 <el-button type="default" @click="resetData()">清空</el-button>
 </el-form>
@@ -118,6 +115,33 @@ export default {
             .catch(error => {
                 console.log(error)
             })//axios发送ajax请求后请求失败
+        },
+        //清空功能
+        resetData() {
+            //将表单输入项的数据置空
+            this.teacherQuery = {}
+            //查询所有讲师数据
+            this.getList()
+        },
+        //删除讲师的方法
+        removeDataById(id) {
+            this.$confirm('此操作将永久删除讲师记录, 是否继续?', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'warning'
+            }).then(() => {  //点击确定，执行then方法
+                //调用删除的方法
+                teacher.deleteTeacherId(id)
+                    .then(response =>{//删除成功
+                    //提示信息
+                    this.$message({
+                        type: 'success',
+                        message: '删除成功!'
+                    });
+                    //回到列表页面
+                    this.getList()
+                })
+            }) //点击取消，执行catch方法
         }
     }
 }
