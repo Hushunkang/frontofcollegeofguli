@@ -20,7 +20,32 @@
         <el-input v-model="teacher.intro" :rows="10" type="textarea"/>
       </el-form-item>
 
-      <!-- TODO讲师头像 -->
+      <!-- 讲师头像 -->
+      <el-form-item label="讲师头像">
+          <!-- 头像缩略图 -->
+          <pan-thumb :image="teacher.avatar"/>
+          <!-- 文件上传按钮 -->
+          <el-button type="primary" icon="el-icon-upload" @click="imagecropperShow=true">更换头像</el-button>
+          <!--
+          v-show：是否显示上传组件
+          :key：类似于id，如果一个页面多个图片上传控件，可以做区分
+          :url：文件上传的后端接口地址
+          @close：关闭上传组件
+          @crop-upload-success：上传成功后的回调 
+          -->
+          <!-- ajax默认不支持上传文件，所以这种请求方式不是ajax而理解为是一种提交表单的方式 -->
+          <!-- <input type="file" name="file"/> -->
+          <image-cropper
+                        v-show="imagecropperShow"
+                        :width="300"
+                        :height="300"
+                        :key="imagecropperKey"
+                        :url="BASE_API+'/ossservice/file/uploadFileToOss'"
+                        field="file"
+                        @close="close"
+                        @crop-upload-success="cropSuccess"/>
+      </el-form-item>
+      <!-- 注意：使用element-ui前端文件上传组件会默认给你上传的文件名统一修改成file.png，因为框架底层怕你文件存在中文名称后面操作会有问题 -->
 
       <el-form-item>
         <el-button :disabled="saveBtnDisabled" type="primary" @click="saveOrUpdate">保存</el-button>
@@ -31,7 +56,10 @@
 
 <script>
 import teacherApi from '@/api/edu/teacher/teacher'
+import ImageCropper from '@/components/ImageCropper'
+import PanThumb from '@/components/PanThumb'
 export default {
+  components: {ImageCropper,PanThumb},
   data(){
     return{
       teacher:{
@@ -42,7 +70,10 @@ export default {
         intro: '',
         avatar: ''
       },
-      saveBtnDisabled:false//保存按钮是否经验，防止表单重复提交(*￣︶￣)
+      imagecropperShow:false,//上传弹框组件是否显示
+      imagecropperKey:0,//上传组件key值
+      BASE_API:process.env.BASE_API,//获取dev.env.js里面地址
+      saveBtnDisabled:false//保存按钮是否禁用，防止表单重复提交(*￣︶￣)
     }
   },
   created(){
@@ -54,6 +85,16 @@ export default {
     }
   },
   methods:{
+    close(){//关闭文件上传弹框的方法
+      this.imagecropperShow = false
+      this.imagecropperKey = this.imagecropperKey+1
+    },
+    cropSuccess(data){//文件上传成功的方法
+      this.imagecropperShow = false
+      //上传成功后返回图片地址
+      this.teacher.avatar = data.url
+      this.imagecropperKey = this.imagecropperKey+1
+    },
     init(){
       //预备知识点：在JavaScript语言中，所有的变量都可以作为一个boolean类型的变量去使用
       //判断请求路径中是否有id，没有就是添加，有就是修改
@@ -65,6 +106,7 @@ export default {
       } else {//路径没有id，添加
         //清空表单（原理：vue的双向绑定）
         this.teacher = {}
+        this.teacher.avatar = 'https://hsk-virtuoso-edu-guli.oss-cn-hangzhou.aliyuncs.com/305452.jpg'//设置一个默认头像
       }
     },
     saveOrUpdate(){
