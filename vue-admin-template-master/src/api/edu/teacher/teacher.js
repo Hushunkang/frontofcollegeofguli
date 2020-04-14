@@ -1,7 +1,6 @@
 import request from '@/utils/request'
 
 export default{
-
     //多条件组合查询带分页效果的讲师数据
     pageTeacherCondition(current,size,teacherQuery){
         return request({
@@ -45,5 +44,4 @@ export default{
             data: teacher
           })
     }
-
 }

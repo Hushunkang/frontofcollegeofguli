@@ -41,7 +41,7 @@ export default {
         }
     },
     created(){
-
+        
     },
     methods:{
         //手动上传文件到服务器
