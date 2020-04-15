@@ -39,7 +39,7 @@ export default {
                 this.data2 = response.data.list
             })
     },
-    filterNode(value, data) {
+    filterNode(value,data){
       if (!value) return true
       return data.title.toLowerCase().indexOf(value.toLowerCase()) !== -1//搜索不区分大小写
     }
