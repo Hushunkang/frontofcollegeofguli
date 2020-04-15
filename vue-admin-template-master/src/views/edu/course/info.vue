@@ -55,7 +55,7 @@
         />
       </el-form-item>
       <el-form-item label="课程简介">
-        <el-input v-model="courseInfo.description" />
+        <tinymce :height="300" v-model="courseInfo.description" />
       </el-form-item>
       <!-- 课程封面-->
       <el-form-item label="课程封面">
@@ -87,7 +87,10 @@
 import teacherApi from "@/api/edu/teacher/teacher";
 import subjectApi from "@/api/edu/subject/subject";
 import courseApi from "@/api/edu/course/course";
+import Tinymce from "@/components/Tinymce"; //引入富文本编辑器Tinymce组件
 export default {
+  //声明富文本编辑器Tinymce组件
+  components: { Tinymce },
   data() {
     return {
       saveBtnDisabled: false, //保存按钮是否禁用
@@ -169,3 +172,8 @@ export default {
   }
 };
 </script>
+<style scoped>
+.tinymce-container {
+  line-height: 29px;
+}
+</style>
