@@ -1,3 +1,3 @@
 exports.info = function (str) {
-    document.write(str); //浏览器输出
+    document.write(str)//浏览器输出
 }

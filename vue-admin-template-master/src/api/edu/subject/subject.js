@@ -1,11 +1,10 @@
 import request from '@/utils/request'
-
-export default{
+export default {
     //课程分类列表
-    getAllSubject(){
+    getAllSubject() {
         return request({
             url: '/eduservice/subject/getAllSubject',
             method: 'get'
-          })
+        })
     }
 }

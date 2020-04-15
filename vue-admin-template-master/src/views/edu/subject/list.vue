@@ -12,37 +12,36 @@
   </div>
 </template>
 <script>
-import subjectApi from '@/api/edu/subject/subject'
+import subjectApi from "@/api/edu/subject/subject";
 export default {
-  data(){
+  data() {
     return {
-      filterText: '',
-      data2: [],//返回的课程分类列表
+      filterText: "",
+      data2: [], //返回的课程分类列表
       defaultProps: {
-        children: 'children',
-        label: 'title'
+        children: "children",
+        label: "title"
       }
-    }
+    };
   },
-  created(){
-      this.getSubjects()
+  created() {
+    this.getSubjects();
   },
-  watch:{
+  watch: {
     filterText(val) {
-      this.$refs.tree2.filter(val)
+      this.$refs.tree2.filter(val);
     }
   },
-  methods:{
-    getSubjects(){
-      subjectApi.getAllSubject()
-            .then(response => {
-                this.data2 = response.data.list
-            })
+  methods: {
+    getSubjects() {
+      subjectApi.getAllSubject().then(response => {
+        this.data2 = response.data.list;
+      });
     },
-    filterNode(value,data){
-      if (!value) return true
-      return data.title.toLowerCase().indexOf(value.toLowerCase()) !== -1//搜索不区分大小写
+    filterNode(value, data) {
+      if (!value) return true;
+      return data.title.toLowerCase().indexOf(value.toLowerCase()) !== -1; //搜索不区分大小写
     }
   }
-}
+};
 </script>

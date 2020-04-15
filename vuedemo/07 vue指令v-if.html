@@ -10,8 +10,8 @@
 
 <body>
     <div id="app">
-        <input type="checkbox" v-model="ok"/>是否同意
-        <!--条件指令 v-if  v-else -->
+        <input type="checkbox" v-model="ok" />是否同意
+        <!-- 条件指令 v-if  v-else -->
         <h1 v-if="ok">尚硅谷</h1>
         <h1 v-else>谷粒学院</h1>
     </div>
@@ -20,7 +20,7 @@
         new Vue({
             el: '#app',
             data: {
-                ok:false
+                ok: false
             }
         })
     </script>

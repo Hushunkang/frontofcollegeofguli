@@ -10,10 +10,10 @@
 
 <body>
     <div id="app">
-        <!--单向绑定-->
-        <input type="text" v-bind:value="searchMap.keyWord"/>
-        <!--双向绑定-->
-        <input type="text" v-model="searchMap.keyWord"/>
+        <!-- 单向绑定 -->
+        <input type="text" v-bind:value="searchMap.keyWord" />
+        <!-- 双向绑定 -->
+        <input type="text" v-model="searchMap.keyWord" />
 
         <p>{{searchMap.keyWord}}</p>
 
@@ -24,7 +24,7 @@
         new Vue({
             el: '#app',
             data: {
-                searchMap:{
+                searchMap: {
                     keyWord: '尚硅谷'
                 }
             }

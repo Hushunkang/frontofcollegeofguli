@@ -14,12 +14,12 @@
             <li v-for="n in 10"> {{n}} </li>
         </ul>
 
-        <!--index表示索引，索引从0开始-->
+        <!-- index表示索引，索引从0开始 -->
         <ol>
             <li v-for="(n,index) in 10">{{n}} -- {{index}}</li>
         </ol>
 
-        <hr/>
+        <hr />
         <table border="1">
             <tr v-for="user in userList">
                 <td>{{user.id}}</td>
@@ -27,7 +27,6 @@
                 <td>{{user.age}}</td>
             </tr>
         </table>
-
     </div>
     <script src="vue.min.js"></script>
     <script>
@@ -35,10 +34,10 @@
             el: '#app',
             data: {
                 userList: [
-                        { id: 1, username: 'helen', age: 18 },
-                        { id: 2, username: 'peter', age: 28 },
-                        { id: 3, username: 'andy', age: 38 }
-                    ]
+                    { id: 1, username: 'helen', age: 18 },
+                    { id: 2, username: 'peter', age: 28 },
+                    { id: 3, username: 'andy', age: 38 }
+                ]
             }
         })
     </script>

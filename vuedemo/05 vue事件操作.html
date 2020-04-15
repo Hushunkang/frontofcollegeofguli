@@ -10,10 +10,10 @@
 
 <body>
     <div id="app">
-        <!--vue绑定事件-->
+        <!-- vue绑定事件 -->
         <button v-on:click="search()">查询</button>
 
-        <!--vue绑定事件简写-->
+        <!-- vue绑定事件简写 -->
         <button @click="search()">查询1</button>
     </div>
     <script src="vue.min.js"></script>
@@ -21,13 +21,13 @@
         new Vue({
             el: '#app',
             data: {
-                searchMap:{
+                searchMap: {
                     keyWord: '尚硅谷'
                 },
                 //查询结果
                 result: {}
             },
-            methods:{//定义多个方法
+            methods: {//定义多个方法
                 search() {
                     console.log('search....')
                 },

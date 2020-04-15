@@ -1,22 +1,22 @@
 <script>
-    //1 传统方式创建方法
+    //1、传统方式创建方法
     //参数 => 函数体
-    var f1 = function(m) {
+    var f1 = function (m) {
         return m
     }
     //console.log(f1(2))
 
     //使用箭头函数改造
     var f2 = m => m//第一个m表示方法参数，第二个m表示方法体内容
-   // console.log(f2(8))
+    // console.log(f2(8))
 
-   //2 复杂一点方法
-   var f3 = function(a,b) {
-       return a+b
-   }
-   //console.log(f3(1,2))
+    //2、复杂一点方法
+    var f3 = function (a, b) {
+        return a + b
+    }
+    //console.log(f3(1,2))
 
-   //箭头函数简化
-   var f4 = (a,b) => a+b
-   console.log(f4(2,2))
+    //箭头函数简化
+    var f4 = (a, b) => a + b
+    console.log(f4(2, 2))
 </script>
