@@ -153,7 +153,7 @@ export default {
     //查询所有讲师
     findAllTeacher() {
       teacherApi.findAllTeacher().then(response => {
-        this.teachers = response.data.items;
+        this.teachers = response.data.list;
       });
     },
     next() {

@@ -7,5 +7,7 @@ export default {
             method: 'post',
             data: courseInfo
         })
-    }
+    },
+    //根据课程ID查询课程基本信息
+    //修改课程基本信息
 }

@@ -141,7 +141,7 @@ export default {
     },
     getTeacherInfo(id) {
       teacherApi.getTeacherById(id).then(response => {
-        this.teacher = response.data.teacher;
+        this.teacher = response.data.eduTeacher;
       });
     },
     updateTeacher() {

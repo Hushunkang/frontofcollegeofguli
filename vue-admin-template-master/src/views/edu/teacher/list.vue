@@ -108,7 +108,7 @@ export default {
         //response表示后端接口返回的数据
         .then(response => {
           // console.log(response)
-          this.list = response.data.rows;
+          this.list = response.data.records;
           console.log(this.list);
           this.total = response.data.total;
           console.log(this.total);

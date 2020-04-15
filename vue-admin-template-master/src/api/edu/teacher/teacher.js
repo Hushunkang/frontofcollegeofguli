@@ -14,9 +14,9 @@ export default {
         })
     },
     //逻辑删除讲师
-    removeTeacher(id) {
+    removeTeacher(teacherId) {
         return request({
-            url: `/eduservice/teacher/removeTeacher/${id}`,
+            url: `/eduservice/teacher/removeTeacher/${teacherId}`,
             method: 'delete'
         })
     },
@@ -29,9 +29,9 @@ export default {
         })
     },
     //根据讲师ID查询讲师
-    getTeacherById(id) {
+    getTeacherById(teacherId) {
         return request({
-            url: `/eduservice/teacher/getTeacherById/${id}`,
+            url: `/eduservice/teacher/getTeacherById/${teacherId}`,
             method: 'get'
         })
     },
