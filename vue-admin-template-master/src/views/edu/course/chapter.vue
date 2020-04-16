@@ -148,6 +148,7 @@ export default {
       this.video.sort = 0;
       this.video.isfree = false;//添加课时的时候默认收费
       this.video.videoSourceId = '';
+      this.video.id = '';//添加的时候，给id置空，后面要做判断是添加还是修改操作，添加操作是不需要id的
       // this.video = {}
     },
     //添加课时或者说添加章节的小节
@@ -188,7 +189,6 @@ export default {
     },
     saveOrUpdateVideo() {
       if (!this.video.id) {
-        alert(this.video.id)
         this.addVideo();
       } else {
         this.updateVideo();
@@ -219,8 +219,9 @@ export default {
       this.dialogChapterFormVisible = true;
       this.dialogChapterTitle = "添加章节";
       //将弹框上面表单数据清空
-      this.chapter.title = "";
+      this.chapter.title = '';
       this.chapter.sort = 0;
+      this.chapter.id = '';//添加的时候，给id置空，后面要做判断是添加还是修改操作，添加操作是不需要id的
     },
     addChapter() {
       this.chapter.courseId = this.courseId;
