@@ -161,10 +161,10 @@ export default {
       const isJPG = file.type === "image/jpeg";
       const isLt2M = file.size / 1024 / 1024 < 2;
       if (!isJPG) {
-        this.$message.error("上传头像图片只能是JPG格式！");
+        this.$message.error("上传头像图片只能是JPG格式");
       }
       if (!isLt2M) {
-        this.$message.error("上传头像图片大小不能超过2MB！");
+        this.$message.error("上传头像图片大小不能超过2MB");
       }
       return isJPG && isLt2M;
     },
@@ -200,7 +200,7 @@ export default {
         //提示
         this.$message({
           type: "success",
-          message: "添加课程信息成功！"
+          message: "添加课程信息成功"
         });
         //步骤条组件，跳转到下一步
         this.$router.push({
@@ -214,7 +214,7 @@ export default {
         //提示
         this.$message({
           type: "success",
-          message: "修改课程信息成功！"
+          message: "修改课程信息成功"
         });
         //步骤条组件，跳转到第二步
         this.$router.push({ path: "/course/chapter/" + this.courseId });
