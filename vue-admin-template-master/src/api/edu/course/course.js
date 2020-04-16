@@ -22,5 +22,12 @@ export default {
             method: 'post',
             data: courseVo
         })
+    },
+    //课程确认信息的显示
+    getPublishCourseInfo(courseId){
+        return request({
+            url: '/eduservice/course/getPublishCourseInfo/' + courseId,
+            method: 'get'
+        })
     }
 }

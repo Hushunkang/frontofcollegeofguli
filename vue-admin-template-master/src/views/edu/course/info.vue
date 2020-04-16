@@ -26,7 +26,7 @@
           />
         </el-select>
         <!-- 二级课程分类 -->
-        <el-select v-model="courseInfo.subjectId" placeholder="二级课程分类">
+        <el-select v-model="courseInfo.subjectId" placeholder="二级课程分类" @change="subjectTwoChanged">
           <el-option
             v-for="subjectTwo in subjectTwos"
             :key="subjectTwo.id"
@@ -182,6 +182,9 @@ export default {
           this.courseInfo.subjectId = "";
         }
       }
+    },
+    subjectTwoChanged(){//这个地方真坑，害我找大半天，看帖子，https://blog.csdn.net/weixin_43216105/article/details/86699772
+      this.$forceUpdate()
     },
     //查询所有一级课程分类
     getSubjectOnes() {

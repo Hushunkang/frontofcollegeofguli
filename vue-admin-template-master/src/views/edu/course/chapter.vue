@@ -7,7 +7,11 @@
       <el-step title="最终发布" />
     </el-steps>
 
-    <el-button type="text" @click="openChapterDialog()">添加章节</el-button>
+    <el-form label-width="120px">
+      <el-form-item>
+        <el-button type="primary" @click="openChapterDialog()">添加章节</el-button>
+      </el-form-item>
+    </el-form>
 
     <!-- 课程章节和课程小节列表 -->
     <ul class="chanpterList">
@@ -15,7 +19,7 @@
         <p>
           {{ chapter.title }}
           <span class="acts">
-            <el-button style type="text" @click="openVideo(chapter.id)">添加课时</el-button>
+            <el-button style type="primary" @click="openVideo(chapter.id)">添加课时</el-button>
             <el-button style type="text" @click="openEditChatper(chapter.id)">编辑</el-button>
             <el-button type="text" @click="removeChapter(chapter.id)">删除</el-button>
           </span>
