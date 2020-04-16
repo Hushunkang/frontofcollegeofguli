@@ -78,7 +78,7 @@
         />元
       </el-form-item>
       <el-form-item>
-        <el-button :disabled="saveBtnDisabled" type="primary" @click="next">保存并下一步</el-button>
+        <el-button :disabled="saveBtnDisabled" type="primary" @click="saveOrUpdate">保存并下一步</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -125,19 +125,19 @@ export default {
   methods: {
     //页面初始化方法
     init() {
-    //拿到路由中的课程ID，观察的出这个ID在前端路由跳转（一个菜单跳到另一个菜单）在URL上面有显示
-    if (this.$route.params && this.$route.params.id) {
-      this.courseId = this.$route.params.id;
-      this.getCourseInfo();
-    } else {
-      //新增操作路由里面没有传递课程ID，这个时候要清空一下表单数据
-      this.courseInfo = {};
-      this.courseInfo.cover = "/static/01.jpg";
-    }
-    //初始化所有讲师
-    this.findAllTeacher();
-    //初始化所有一级课程
-    this.getSubjectOnes();
+      //拿到路由中的课程ID，观察的出这个ID在前端路由跳转（一个菜单跳到另一个菜单）在URL上面有显示
+      if (this.$route.params && this.$route.params.id) {
+        this.courseId = this.$route.params.id;
+        this.getCourseInfo();
+      } else {
+        //新增操作路由里面没有传递课程ID，这个时候要清空一下表单数据
+        this.courseInfo = {};
+        this.courseInfo.cover = "/static/01.jpg";
+      }
+      //初始化所有讲师
+      this.findAllTeacher();
+      //初始化所有一级课程
+      this.getSubjectOnes();
     },
     //根据课程ID查询课程基本信息
     getCourseInfo() {
@@ -195,18 +195,39 @@ export default {
         this.teachers = response.data.list;
       });
     },
-    next() {
+    addCourseInfo() {
       courseApi.addCourseInfo(this.courseInfo).then(response => {
         //提示
         this.$message({
           type: "success",
-          message: "添加课程信息成功!"
+          message: "添加课程信息成功！"
         });
         //步骤条组件，跳转到下一步
         this.$router.push({
           path: "/course/chapter/" + response.data.courseId
         });
       });
+    },
+    //修改课程
+    updateCourseInfo() {
+      courseApi.updateCourseInfo(this.courseInfo).then(response => {
+        //提示
+        this.$message({
+          type: "success",
+          message: "修改课程信息成功！"
+        });
+        //步骤条组件，跳转到第二步
+        this.$router.push({ path: "/course/chapter/" + this.courseId });
+      });
+    },
+    saveOrUpdate() {
+      if (!this.courseInfo.id) {
+        //添加操作，courseInfo里面没有id值
+        this.addCourseInfo();
+      } else {
+        //修改操作，courseInfo里面有id值
+        this.updateCourseInfo();
+      }
     }
   }
 };
