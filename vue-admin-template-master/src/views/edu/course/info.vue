@@ -107,16 +107,55 @@ export default {
       BASE_API: process.env.BASE_API,
       teachers: [], //用于封装讲师列表
       subjectOnes: [], //用于封装所有一级分类课程
-      subjectTwos: [] //用于封装所有二级分类课程
+      subjectTwos: [], //用于封装所有二级分类课程
+      courseId: ""
     };
   },
   created() {
     console.log("info created");
-    //初始化所有讲师
-    this.findAllTeacher();
-    this.getSubjectOnes();
+    this.init();
+  },
+  watch: {
+    //vue路由监听
+    $route(to, from) {
+      //to和from表示路由变化的方式，一旦路由发生变化，这个方法就会执行，说白了就是菜单变了这个方法就被触发
+      this.init();
+    }
   },
   methods: {
+    //页面初始化方法
+    init() {
+    //拿到路由中的课程ID，观察的出这个ID在前端路由跳转（一个菜单跳到另一个菜单）在URL上面有显示
+    if (this.$route.params && this.$route.params.id) {
+      this.courseId = this.$route.params.id;
+      this.getCourseInfo();
+    } else {
+      //新增操作路由里面没有传递课程ID，这个时候要清空一下表单数据
+      this.courseInfo = {};
+      this.courseInfo.cover = "/static/01.jpg";
+    }
+    //初始化所有讲师
+    this.findAllTeacher();
+    //初始化所有一级课程
+    this.getSubjectOnes();
+    },
+    //根据课程ID查询课程基本信息
+    getCourseInfo() {
+      courseApi.getCourseInfo(this.courseId).then(response => {
+        this.courseInfo = response.data.courseVo;
+        //查询所有课程分类
+        subjectApi.getAllSubject().then(response => {
+          //获取所有一级课程
+          this.subjectOnes = response.data.list;
+          //匹配，取出要拿到的二级课程分类
+          for (var i = 0; i < this.subjectOnes.length; i++) {
+            if (this.subjectOnes[i].id === this.courseInfo.subjectParentId) {
+              this.subjectTwos = this.subjectOnes[i].children;
+            }
+          }
+        });
+      });
+    },
     //上传课程封面之前调用的方法
     beforeAvatarUpload(file) {
       const isJPG = file.type === "image/jpeg";

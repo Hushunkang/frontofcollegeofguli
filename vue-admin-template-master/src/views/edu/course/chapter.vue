@@ -12,9 +12,7 @@
       <li v-for="chapter in chapterVideoList" :key="chapter.id">
         {{ chapter.title }}
         <ul>
-          <li v-for="video in chapter.children" :key="video.id">
-            {{ video.title }}
-          </li>
+          <li v-for="video in chapter.children" :key="video.id">{{ video.title }}</li>
         </ul>
         <!-- <p>
           {{ chapter.title }}
@@ -23,7 +21,7 @@
             <el-button style type="text">编辑</el-button>
             <el-button type="text">删除</el-button>
           </span>
-        </p> -->
+        </p>-->
         <!-- 视频 -->
         <!-- <ul class="chanpterList videoList">
           <li v-for="video in chapter.children" :key="video.id">
@@ -35,7 +33,7 @@
               </span>
             </p>
           </li>
-        </ul> -->
+        </ul>-->
       </li>
     </ul>
 
@@ -75,11 +73,11 @@ export default {
     },
     previous() {
       console.log("previous");
-      this.$router.push({ path: "/course/info/1" });
+      this.$router.push({ path: "/course/info/" + this.courseId });
     },
     next() {
       console.log("next");
-      this.$router.push({ path: "/course/publish/1" });
+      this.$router.push({ path: "/course/publish/" + this.courseId });
     }
   }
 };
