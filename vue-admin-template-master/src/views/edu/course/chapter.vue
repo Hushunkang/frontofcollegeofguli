@@ -7,11 +7,7 @@
       <el-step title="最终发布" />
     </el-steps>
 
-    <el-form label-width="120px">
-      <el-form-item>
-        <el-button type="primary" @click="openChapterDialog()">添加章节</el-button>
-      </el-form-item>
-    </el-form>
+    <el-button type="primary" @click="openChapterDialog()">添加章节</el-button>
 
     <!-- 课程章节和课程小节列表 -->
     <ul class="chanpterList">
@@ -68,9 +64,9 @@
           <el-input-number v-model="video.sort" :min="0" controls-position="right" />
         </el-form-item>
         <el-form-item label="是否免费">
-          <el-radio-group v-model="video.free">
-            <el-radio :label="true">免费</el-radio>
+          <el-radio-group v-model="video.isFree">
             <el-radio :label="false">默认</el-radio>
+            <el-radio :label="true">免费</el-radio>
           </el-radio-group>
         </el-form-item>
         <el-form-item label="上传视频">
@@ -102,13 +98,13 @@ export default {
         //封装小节数据
         title: "",
         sort: 0,
-        free: 0,
+        isFree: false,//默认情况是收费的
         videoSourceId: ""
       },
       dialogChapterFormVisible: false, //章节弹框
       dialogVideoFormVisible: false, //小节弹框
-      dialogChapterTitle: '',
-      dialogVideoTitle: ''
+      dialogChapterTitle: "",
+      dialogVideoTitle: ""
     };
   },
   created() {
@@ -148,10 +144,11 @@ export default {
       //设置课程章节ID
       this.video.chapterId = chapterId;
       //将弹框上面表单数据清空
-      this.video.title = "";
+      this.video.title = '';
       this.video.sort = 0;
-      this.video.sort = 0;
-      this.videoSourceId = "";
+      this.video.isfree = false;//添加课时的时候默认收费
+      this.video.videoSourceId = '';
+      // this.video = {}
     },
     //添加课时或者说添加章节的小节
     addVideo() {
@@ -168,7 +165,7 @@ export default {
         this.getChapterVideo();
       });
     },
-    //修改课程章节信息，数据回显
+    //修改课程小节信息，数据回显
     openEditVideo(videoId) {
       this.dialogVideoFormVisible = true;
       this.dialogVideoTitle = "编辑课时";
@@ -190,8 +187,8 @@ export default {
       });
     },
     saveOrUpdateVideo() {
-      alert(this.video.id);
       if (!this.video.id) {
+        alert(this.video.id)
         this.addVideo();
       } else {
         this.updateVideo();
@@ -220,7 +217,7 @@ export default {
     //添加课程章节信息弹框
     openChapterDialog() {
       this.dialogChapterFormVisible = true;
-      this.dialogChapterTitle = '添加章节';
+      this.dialogChapterTitle = "添加章节";
       //将弹框上面表单数据清空
       this.chapter.title = "";
       this.chapter.sort = 0;
@@ -242,7 +239,7 @@ export default {
     //修改课程章节信息，数据回显
     openEditChatper(chapterId) {
       this.dialogChapterFormVisible = true;
-      this.dialogChapterTitle = "编辑章节"
+      this.dialogChapterTitle = "编辑章节";
       chapterApi.getChapterInfo(chapterId).then(response => {
         this.chapter = response.data.eduChapter;
       });
