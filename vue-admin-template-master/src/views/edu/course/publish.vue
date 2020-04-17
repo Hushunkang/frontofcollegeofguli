@@ -54,12 +54,16 @@ export default {
       });
     },
     previous() {
-      console.log("previous");
       this.$router.push({ path: "/course/chapter/" + this.courseId });
     },
     publish() {
-      console.log("publish");
-      this.$router.push({ path: "/course/list" });
+      courseApi.publishCourse(this.courseId).then(response => {
+        this.$message({
+          type: "success",
+          message: "课程发布成功"
+        });
+        this.$router.push({ path: "/course/list" });
+      });
     }
   }
 };
