@@ -78,6 +78,7 @@
             :before-remove="beforeVodRemove"
             :on-exceed="handleUploadExceed"
             :file-list="fileList"
+            :show-file-list="showFileList"
             :action="BASE_API+'/vodservice/video/uploadVideo'"
             :limit="1"
             class="upload-demo"
@@ -128,10 +129,11 @@ export default {
       },
       dialogChapterFormVisible: false, //章节弹框
       dialogVideoFormVisible: false, //小节弹框
-      fileList: [],//文件列表，这个文件上传的组件可以支持上传多个文件
-      BASE_API: process.env.BASE_API,//nginx的地址，nginx根据路径匹配做反向代理到具体的应用服务器
       dialogChapterTitle: "",
-      dialogVideoTitle: ""
+      dialogVideoTitle: "",
+      fileList: [],//文件列表，这个文件上传的组件可以支持上传多个文件
+      showFileList: true,//是否显示已经上传成功了的文件
+      BASE_API: process.env.BASE_API//nginx的地址，nginx根据路径匹配做反向代理到具体的应用服务器
     };
   },
   created() {
@@ -145,32 +147,34 @@ export default {
   },
   methods: {
     // ==============================利用文件上传组件来上传视频==========================================
-    //点击删除视频确定按钮调用的方法
+    //点击删除视频确定按钮，点击确认按钮后会就去调用后端的删除视频的接口
     handleVodRemove() {
         //调用接口的删除视频的方法
-        videoApi.deleteAliyunvod(this.video.videoSourceId)
+        videoApi.removeVideo(this.video.videoSourceId)
             .then(response => {
                 //提示信息
                 this.$message({
                     type: 'success',
-                    message: '删除视频成功!'
+                    message: '删除视频成功'
                 });
                 //把文件列表清空
                 this.fileList = []
-                //把video视频id和视频名称值清空
-                //上传视频id赋值
+                //删除视频成功后需要给上传视频id和上传视频名称置空，要不然删除视频后保存课程小节信息，表中视频id和视频名称是有值的！
+                //上传视频id
                 this.video.videoSourceId = ''
-                //上传视频名称赋值
+                //上传视频名称
                 this.video.videoOriginalName = ''
             })
     },
     //点击×这个图标调用这个方法
     beforeVodRemove(file,fileList) {
-        return this.$confirm(`确定移除 ${ file.name }？`);
+        return this.$confirm(`确定移除 ${ file.name } `);
     },
     //上传视频成功调用的方法
     handleVodUploadSuccess(response, file, fileList) {
-      // alert(fileList);
+      // alert(file);
+      console.log(file);
+      console.log(fileList);
       // debugger;
       //上传视频ID
       this.video.videoSourceId = response.data.videoId;
@@ -178,7 +182,7 @@ export default {
       this.video.videoOriginalName = file.name;
       console.log("上传的视频的原始文件名称：" + this.video.videoOriginalName)
     },
-    //视频上传多于一个视频
+    //如果视频上传多于设置的个数，这里为1个，这个方法就会被触发，:limit="1"
     handleUploadExceed() {
       this.$message.warning("想要重新上传视频，请先删除已上传的视频");
     },

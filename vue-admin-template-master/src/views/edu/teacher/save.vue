@@ -136,7 +136,7 @@ export default {
           message: "添加成功"
         });
         //路由跳转，回到讲师列表页面，路由跳转说的底层一点就是所学的JavaWEB技术栈里面的重定向操作(*￣︶￣)
-        this.$router.push({ path: "/teacher/table" });
+        this.$router.push({ path: "/teacher/list" });
       });
     },
     getTeacherInfo(id) {

@@ -23,10 +23,17 @@ export default {
             data: eduVideo
         })
     },
-    //删除课程章节
+    //删除课程小节
     deleteVideo(videoId) {
         return request({
-            url: '/eduservice/video/' + videoId,
+            url: '/eduservice/video/deleteVideo/' + videoId,
+            method: 'delete'
+        })
+    },
+    //根据阿里云视频点播服务为每一个视频生成的视频ID来删除云端视频
+    removeVideo(videoSourceId){
+        return request({
+            url: '/vodservice/video/removeVideo/' + videoSourceId,
             method: 'delete'
         })
     }
