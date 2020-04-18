@@ -152,7 +152,7 @@ export default {
           message: "修改成功"
         });
         //路由跳转，回到讲师列表页面
-        this.$router.push({ path: "/teacher/table" });
+        this.$router.push({ path: "/teacher/list" });
       });
     }
   }

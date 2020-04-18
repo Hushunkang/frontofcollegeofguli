@@ -32,10 +32,10 @@
       <el-table-column prop="viewCount" label="浏览数量" width="120" />
       <el-table-column label="操作"  align="center">
         <template slot-scope="scope">
-          <router-link :to="'/course/edit/'+scope.row.id">
+          <router-link :to="'/course/info/'+scope.row.id">
             <el-button type="primary" size="mini" icon="el-icon-edit">编辑课程基本信息</el-button>
           </router-link>
-          <router-link :to="'/course/edit/'+scope.row.id">
+          <router-link :to="'/course/chapter/'+scope.row.id">
             <el-button type="primary" size="mini" icon="el-icon-edit">编辑课程大纲信息</el-button>
           </router-link>
           <el-button
