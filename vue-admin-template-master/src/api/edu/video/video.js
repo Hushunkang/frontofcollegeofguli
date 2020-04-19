@@ -31,9 +31,9 @@ export default {
         })
     },
     //根据阿里云视频点播服务为每一个视频生成的视频ID来删除云端视频
-    removeVideo(videoSourceId){
+    removeVideo(videoSourceIds){
         return request({
-            url: '/vodservice/video/removeVideo/' + videoSourceId,
+            url: '/vodservice/video/removeVideo/' + videoSourceIds,
             method: 'delete'
         })
     }

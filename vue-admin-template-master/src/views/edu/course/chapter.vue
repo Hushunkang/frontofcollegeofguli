@@ -78,7 +78,6 @@
             :before-remove="beforeVodRemove"
             :on-exceed="handleUploadExceed"
             :file-list="fileList"
-            :show-file-list="showFileList"
             :action="BASE_API+'/vodservice/video/uploadVideo'"
             :limit="1"
             class="upload-demo"
@@ -132,7 +131,6 @@ export default {
       dialogChapterTitle: "",
       dialogVideoTitle: "",
       fileList: [],//文件列表，这个文件上传的组件可以支持上传多个文件
-      showFileList: true,//是否显示已经上传成功了的文件
       BASE_API: process.env.BASE_API//nginx的地址，nginx根据路径匹配做反向代理到具体的应用服务器
     };
   },
@@ -210,6 +208,7 @@ export default {
     openVideo(chapterId) {
       this.dialogVideoFormVisible = true;
       this.dialogVideoTitle = "添加课时";
+      this.fileList = [];
       //设置课程章节ID
       this.video.chapterId = chapterId;
       //将弹框上面表单数据清空
@@ -236,12 +235,22 @@ export default {
         this.getChapterVideo();
       });
     },
-    //修改课程小节信息，数据回显
+    //修改课程小节信息，数据回显（注意：如果有需要回显小节下面的视频信息，我的解决方案如下）
+    //返回的数据里面其实有videoSourceId和videoOriginalName，前端工程师需要根据videoSourceId是否为空做判断
+    //如果为空表示这个小节下面没有视频，有的话要根据这两个参数构造出一个视频的列表（其实这个列表就是一个视频了，因为一个小节下面最多挂一个视频）
+    //修改数据，根据项目业务需要回显必要的数据信息
     openEditVideo(videoId) {
       this.dialogVideoFormVisible = true;
       this.dialogVideoTitle = "编辑课时";
       videoApi.getVideoInfo(videoId).then(response => {
         this.video = response.data.eduVideo;
+        // alert(this.video.videoOriginalName)
+        // alert(this.video.videoSourceId)
+        // alert(typeof(this.video.videoOriginalName))
+        // alert(typeof(this.video.videoSourceId))
+        //这里面有个细节哈，后端数据库里面如果是空字符串最后到达前端也是空字符串（类型string）
+        //后端数据库里面如果是null（不是null字符串），返回前端的便是null（类型Object）
+        //因此前端判断某个数据是否为空的标准就是这个数据即不为空字符串也不为null（不是null字符串）
       });
     },
     updateVideo() {

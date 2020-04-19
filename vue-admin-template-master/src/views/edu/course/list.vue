@@ -16,20 +16,20 @@
     </el-form>
     <!-- 表格 -->
     <el-table :data="list" border fit highlight-current-row>
-      <el-table-column label="序号" width="70" align="center">
+      <el-table-column label="序号" width="50" align="center">
         <template slot-scope="scope">
           <!-- 显示记录的序号 -->
           {{ (current - 1) * size + scope.$index + 1 }}
           <!-- 这里的scope对象表示这个表格对象 -->
         </template>
       </el-table-column>
-      <el-table-column prop="title" label="课程名称" width="80" />
-      <el-table-column label="课程状态" width="80">
+      <el-table-column prop="title" label="课程名称" width="140" />
+      <el-table-column label="课程状态" width="100">
         <template slot-scope="scope">{{ scope.row.status === 'Draft' ? '未发布' : '已发布' }}</template>
       </el-table-column>
-      <el-table-column prop="lessonNum" label="课时数" width="120"/>
+      <el-table-column prop="lessonNum" label="课时数" width="80"/>
       <el-table-column prop="gmtCreate" label="添加时间"  width="160"/>
-      <el-table-column prop="viewCount" label="浏览数量" width="120" />
+      <el-table-column prop="viewCount" label="浏览数量" width="100" />
       <el-table-column label="操作"  align="center">
         <template slot-scope="scope">
           <router-link :to="'/course/info/'+scope.row.id">

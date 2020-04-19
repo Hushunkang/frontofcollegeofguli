@@ -98,7 +98,7 @@ export default {
       this.imagecropperShow = false;
       //上传成功后返回图片地址
       this.teacher.avatar = data.url;
-      this.imagecropperKey = this.imagecropperKey + 1;
+      this.imagecropperKey = this.imagecropperKey + 1;//刷新作用
     },
     init() {
       //预备知识点：在JavaScript语言中，所有的变量都可以作为一个boolean类型的变量去使用
