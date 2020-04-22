@@ -1,13 +1,17 @@
 module.exports = {
+  plugins: [
+    { src: '~/plugins/nuxt-swiper-plugin.js', ssr: false }
+  ],
   /*
   ** Headers of the page
   */
   head: {
-    title: '{{ name }}',
+    title: '谷粒学院',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '{{escape description }}' }
+      { hid: 'keywords', name: 'keywords', content: '谷粒学院' },
+      { hid: 'description', name: 'description', content: '谷粒学院' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
@@ -24,7 +28,7 @@ module.exports = {
     /*
     ** Run ESLint on save
     */
-    extend (config, { isDev, isClient }) {
+    extend(config, { isDev, isClient }) {
       if (isDev && isClient) {
         config.module.rules.push({
           enforce: 'pre',
