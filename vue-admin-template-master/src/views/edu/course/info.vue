@@ -101,7 +101,7 @@ export default {
         teacherId: "",
         lessonNum: 0,
         description: "",
-        cover: "/static/cover_default.jpg",
+        cover: "https://hsk-virtuoso-edu-guli.oss-cn-hangzhou.aliyuncs.com/cover_default.jpg",
         price: 0
       },
       BASE_API: process.env.BASE_API,
@@ -132,7 +132,7 @@ export default {
       } else {
         //新增操作路由里面没有传递课程ID，这个时候要清空一下表单数据
         this.courseInfo = {};
-        this.courseInfo.cover = "/static/cover_default.jpg";
+        this.courseInfo.cover = "https://hsk-virtuoso-edu-guli.oss-cn-hangzhou.aliyuncs.com/cover_default.jpg";
       }
       //初始化所有讲师
       this.findAllTeacher();

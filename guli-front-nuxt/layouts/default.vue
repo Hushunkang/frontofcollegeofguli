@@ -1,6 +1,6 @@
 <template>
   <div class="in-wrap">
-    <!-- 公共头引入 -->
+    <!-- 公共头部页面的引入 -->
     <header id="header">
       <section class="container">
         <h1 id="logo">

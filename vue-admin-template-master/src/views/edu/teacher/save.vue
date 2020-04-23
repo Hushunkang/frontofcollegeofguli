@@ -114,7 +114,7 @@ export default {
         //清空表单（原理：vue的双向绑定）
         this.teacher = {};
         this.teacher.avatar =
-          "https://hsk-virtuoso-edu-guli.oss-cn-hangzhou.aliyuncs.com/305452.jpg"; //设置一个默认头像
+          "https://hsk-virtuoso-edu-guli.oss-cn-hangzhou.aliyuncs.com/default_avatar.jpg"; //设置一个默认头像
       }
     },
     saveOrUpdate() {

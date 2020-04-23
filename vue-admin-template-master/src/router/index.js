@@ -132,6 +132,35 @@ export const constantRouterMap = [
   },
 
   {
+    path: '/banner',
+    component: Layout,
+    redirect: '/banner/list',
+    name: 'banner管理',
+    meta: { title: 'banner管理', icon: 'example' },
+    children: [
+      {
+        path: 'list',
+        name: 'banner列表',
+        component: () => import('@/views/edu/banner/list'),
+        meta: { title: 'banner列表', icon: 'table' }
+      },
+      {
+        path: 'save',
+        name: '添加banner',
+        component: () => import('@/views/edu/banner/save'),
+        meta: { title: '添加banner', icon: 'form' }
+      },
+      {
+        path: 'edit/:id',//id这种写法类似于早期原生jdbc的那个sql里面占位符的写法（底层使用PreparedStatement对象操作这种sql）
+        name: '编辑banner',
+        component: () => import('@/views/edu/banner/save'),
+        meta: { title: '编辑banner', icon: 'form' },
+        hidden: true
+      }//这种操作叫隐藏路由，说白了就是前端中隐藏的菜单
+    ]
+  },
+
+  {
     path: '/example',
     component: Layout,
     redirect: '/example/table',
