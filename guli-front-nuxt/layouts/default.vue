@@ -1,6 +1,6 @@
 <template>
   <div class="in-wrap">
-    <!-- 公共头部页面的引入 -->
+    <!-- 公共头部 -->
     <header id="header">
       <section class="container">
         <h1 id="logo">
@@ -26,7 +26,7 @@
               <a>问答</a>
             </router-link>
           </ul>
-          <!-- nav -->
+          <!-- 登录注册相关，未登录显示第一个li，登录后显示第二个和第三个li -->
           <ul class="h-r-login">
             <li id="no-login">
               <a href="/sing_in" title="登录">
@@ -55,14 +55,13 @@
                 />
                 <span class="vam disIb" id="userName"></span>
               </a>
-              <a href="javascript:void(0)" title="退出" onclick="exit();" class="ml5">退出</a>
+              <a href="javascript:void(0);" title="退出" onclick="exit();" class="ml5">退出</a>
             </li>
-            <!-- 未登录显示第1 li；登录后显示第2，3 li -->
           </ul>
           <aside class="h-r-search">
             <form action="#" method="post">
               <label class="h-r-s-box">
-                <input type="text" placeholder="输入你想学的课程" name="queryCourse.courseName" value />
+                <input type="text" placeholder="请输入您想学的课程" name="courseQuery.title" value />
                 <button type="submit" class="s-btn">
                   <em class="icon18">&nbsp;</em>
                 </button>
@@ -76,11 +75,12 @@
         <div class="clear"></div>
       </section>
     </header>
-    <!-- 公共头引入 -->
+    <!-- 公共头部 -->
 
     <nuxt />
+    <!-- 中间通过nuxt标签引入了另一个vue页面，此框架下，默认引入的vue页面是~/pages/index.vue -->
 
-    <!-- 公共底引入 -->
+    <!-- 公共底部 -->
     <footer id="footer">
       <section class="container">
         <div class>
@@ -89,7 +89,7 @@
           </h4>
           <ul class="of flink-list">
             <li>
-              <a href="http://www.atguigu.com/" title="尚硅谷" target="_blank">尚硅谷</a>
+              <a href="https://www.tsinghua.edu.cn/index.htm" title="Tsinghua" target="_blank">清华大学</a>
             </li>
           </ul>
           <div class="clear"></div>
@@ -102,11 +102,11 @@
                 <a href="#" title="联系我们" target="_blank">联系我们</a>|
                 <a href="#" title="帮助中心" target="_blank">帮助中心</a>|
                 <a href="#" title="资源下载" target="_blank">资源下载</a>|
-                <span>服务热线：010-56253825(北京) 0755-85293825(深圳)</span>
-                <span>Email：info@atguigu.com</span>
+                <span>服务热线：010-56253825(北京) 0755-85293825(上海)</span>
+                <span>Email：info@tsinghua.edu.cn</span>
               </section>
               <section class="b-f-link mt10">
-                <span>©2018课程版权均归谷粒学院所有 京ICP备17055252号</span>
+                <span>©2020课程版权均归谷粒学院所有 京ICP备17055252号</span>
               </section>
             </section>
           </section>
@@ -128,7 +128,7 @@
         </div>
       </section>
     </footer>
-    <!-- 公共底引入 -->
+    <!-- 公共底部 -->
   </div>
 </template>
 <script>

@@ -1,6 +1,6 @@
 <template>
   <div id="aCoursesList" class="bg-fa of">
-    <!-- /课程列表 开始 -->
+    <!-- 课程列表开始 -->
     <section class="container">
       <header class="comm-title">
         <h2 class="fl tac">

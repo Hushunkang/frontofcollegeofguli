@@ -1,10 +1,15 @@
 <template>
   <div>
-    <!-- 幻灯片 开始 -->
+    <!-- 幻灯片、轮播图开始 -->
     <div v-swiper:mySwiper="swiperOption">
       <div class="swiper-wrapper">
-        <div v-for="banner in banners" :key="banner.id" class="swiper-slide" style="background: #040B1B;">
-          <a target="_blank" :href="banner.linkUrl">
+        <div
+          v-for="banner in banners"
+          :key="banner.id"
+          class="swiper-slide"
+          style="background: #040B1B;"
+        >
+          <a target="_blank" :href="banner.linkUrl" :title="banner.title">
             <img :src="banner.imageUrl" :alt="banner.title" />
           </a>
         </div>
@@ -13,10 +18,10 @@
       <div class="swiper-button-prev swiper-button-white" slot="button-prev"></div>
       <div class="swiper-button-next swiper-button-white" slot="button-next"></div>
     </div>
-    <!-- 幻灯片 结束 -->
+    <!-- 幻灯片、轮播图结束 -->
 
     <div id="aCoursesList">
-      <!-- 网校课程 开始 -->
+      <!-- 课程开始 -->
       <div>
         <section class="container">
           <header class="comm-title">
@@ -30,26 +35,26 @@
                 <li v-for="course in courses" :key="course.id">
                   <div class="cc-l-wrap">
                     <section class="course-img">
-                      <img
-                        :src="course.cover"
-                        class="img-responsive"
-                        :alt="course.title"
-                      />
+                      <img :src="course.cover" class="img-responsive" :alt="course.title" />
                       <div class="cc-mask">
                         <a href="#" title="开始学习" class="comm-btn c-btn-1">开始学习</a>
                       </div>
                     </section>
                     <h3 class="hLh30 txtOf mt10">
-                      <a href="#" :title="course.title" class="course-title fsize18 c-333">{{ course.title }}</a>
+                      <a
+                        href="#"
+                        :title="course.title"
+                        class="course-title fsize18 c-333"
+                      >{{ course.title }}</a>
                     </h3>
                     <section class="mt10 hLh20 of">
                       <span class="fr jgTag bg-green" v-if="Number(course.price) === 0.00">
                         <i class="c-fff fsize12 f-fA">免费</i>
                       </span>
                       <span class="fl jgAttr c-ccc f-fA">
-                        <i class="c-999 f-fA">9634人学习</i>
+                        <i class="c-999 f-fA">8354人学习</i>
                         |
-                        <i class="c-999 f-fA">9634评论</i>
+                        <i class="c-999 f-fA">534评论</i>
                       </span>
                     </section>
                   </div>
@@ -63,9 +68,9 @@
           </div>
         </section>
       </div>
-      <!-- 网校课程 结束 -->
+      <!-- 课程结束 -->
 
-      <!-- 网校名师 开始 -->
+      <!-- 讲师开始 -->
       <div>
         <section class="container">
           <header class="comm-title">
@@ -84,15 +89,17 @@
                       </a>
                     </div>
                     <div class="mt10 hLh30 txtOf tac">
-                      <a href="/teacher/1" :title="teacher.name" class="fsize18 c-666">{{ teacher.name }}</a>
+                      <a
+                        href="/teacher/1"
+                        :title="teacher.name"
+                        class="fsize18 c-666"
+                      >{{ teacher.name }}</a>
                     </div>
                     <div class="hLh30 txtOf tac">
                       <span class="fsize14 c-999">{{teacher.career}}</span>
                     </div>
                     <div class="mt15 i-q-txt">
-                      <p
-                        class="c-999 f-fA"
-                      >{{teacher.intro}}</p>
+                      <p class="c-999 f-fA">{{teacher.intro}}</p>
                     </div>
                   </section>
                 </li>
@@ -105,7 +112,7 @@
           </div>
         </section>
       </div>
-      <!-- 网校名师 结束 -->
+      <!-- 讲师结束 -->
     </div>
   </div>
 </template>
@@ -115,46 +122,42 @@ import indexApi from "@/api/index/index";
 export default {
   data() {
     return {
+      //swiper幻灯片、轮播图的前端组件
       swiperOption: {
-        //配置分页
         pagination: {
-          el: ".swiper-pagination" //分页的dom节点
+          el: ".swiper-pagination"
         },
-        //配置导航
         navigation: {
-          nextEl: ".swiper-button-next", //下一页dom节点
-          prevEl: ".swiper-button-prev" //前一页dom节点
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev"
         }
       },
       //banner列表
       banners: [],
-      //课程们
+      //课程列表
       courses: [],
-      //讲师们
+      //讲师列表
       teachers: []
     };
   },
   created() {
-    //调用查询banner列表的方法
     this.getBanners();
     this.getHotCoursesAndTeachers();
   },
   methods: {
-    //查询热门课程和讲师
-    getHotCoursesAndTeachers(){
-      indexApi.index().then(response => {
-        console.log("热门课程和讲师信息：" + response);
-        this.courses = response.data.data.courseList;
-        this.teachers = response.data.data.teacherList;
-      })
-    },
     //查询banner列表
     getBanners() {
       bannerApi.getBanners().then(response => {
-        console.log("banner列表信息：" + response);
         this.banners = response.data.data.list;
       });
+    },
+    //查询热门课程和讲师
+    getHotCoursesAndTeachers() {
+      indexApi.index().then(response => {
+        this.courses = response.data.data.courseList;
+        this.teachers = response.data.data.teacherList;
+      });
     }
-}
+  }
 };
 </script>
