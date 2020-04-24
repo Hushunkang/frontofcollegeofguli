@@ -37,12 +37,12 @@
                     <section class="course-img">
                       <img :src="course.cover" class="img-responsive" :alt="course.title" />
                       <div class="cc-mask">
-                        <a href="#" title="开始学习" class="comm-btn c-btn-1">开始学习</a>
+                        <a href="/course/1" title="开始学习" class="comm-btn c-btn-1">开始学习</a><!-- 默认去找当前文件目录下的course目录下的index.vue -->
                       </div>
                     </section>
                     <h3 class="hLh30 txtOf mt10">
                       <a
-                        href="#"
+                        href="/course/1"
                         :title="course.title"
                         class="course-title fsize18 c-333"
                       >{{ course.title }}</a>
@@ -84,7 +84,7 @@
                 <li v-for="teacher in teachers" :key="teacher.id">
                   <section class="i-teach-wrap">
                     <div class="i-teach-pic">
-                      <a href="/teacher/1" :title="teacher.name">
+                      <a href="/teacher/1" :title="teacher.name"><!-- 默认去找当前文件目录下的teacher目录下的index.vue -->
                         <img :alt="teacher.name" :src="teacher.avatar" />
                       </a>
                     </div>

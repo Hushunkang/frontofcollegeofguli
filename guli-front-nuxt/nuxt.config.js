@@ -1,6 +1,6 @@
 module.exports = {
   plugins: [
-    { src: '~/plugins/nuxt-swiper-plugin.js', ssr: false }
+    { src: '~/plugins/nuxt-plugin.js', ssr: false }
   ],
   /*
   ** Headers of the page
