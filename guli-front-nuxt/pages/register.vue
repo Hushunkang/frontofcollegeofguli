@@ -82,7 +82,7 @@
               id="weixin"
               class="weixin"
               target="_blank"
-              href="http://huaan.free.idcfengye.com/api/ucenter/wx/login"
+              href="#"
             >
               <i class="iconfont icon-weixin" />
             </a>
@@ -130,6 +130,8 @@ export default {
             type: "success",
             message: "注册成功"
           });
+          //跳转到登录页面
+        this.$router.push({ path: "/login" });//路由跳转，回到登录页面，路由跳转说的底层一点就是所学的JavaWEB技术栈里面的重定向操作(*￣︶￣)
         } else {
           //提示注册成功
           this.$message({
@@ -138,15 +140,13 @@ export default {
           });
         }
         //最好做一个功能，让用户点击了提交按钮后，不能让用户继续点击了，否则表单重复提交相当于造成了高并发问题，系统中出现了好几个一模一样的记录
-        //跳转到登录页面
-        this.$router.push({ path: "/login" });
       });
     },
     //倒计时
     timeDown() {
       let result = setInterval(() => {
         --this.second;
-        this.codeText = this.second;
+        this.codeText = "验证码已发送，接收约需要" + this.second + "秒";
         if (this.second < 1) {
           clearInterval(result);
           this.sending = true;

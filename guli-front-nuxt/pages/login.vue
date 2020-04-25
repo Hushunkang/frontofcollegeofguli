@@ -37,12 +37,13 @@
 <script>
   import '~/assets/css/sign.css'
   import '~/assets/css/iconfont.css'
-//   import cookie from 'js-cookie'
+  import cookie from 'js-cookie'
+  import loginApi from "@/api/login/login"
   export default {
     layout: 'sign',
     data () {
       return {
-        user:{
+        user:{//用于封装手机号和密码对象
           mobile:'',
           password:''
         },
