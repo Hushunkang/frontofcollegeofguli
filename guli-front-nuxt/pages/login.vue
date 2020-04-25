@@ -20,7 +20,7 @@
           </div>
         </el-form-item>
         <div class="btn">
-          <input type="button" class="sign-in-button" value="登录" @click="submitLogin()">
+          <input type="button" class="sign-in-button" value="登录" @click="login()">
         </div>
       </el-form>
       <!-- 更多登录方式 -->
@@ -51,6 +51,40 @@
       }
     },
     methods: {
+      login(user){
+        //第一步 调用接口进行登录，返回token字符串
+        loginApi.login(this.user) 
+           .then(response => {
+
+             //有可能登录不成功，给前端响应
+            //  debugger
+            if(response.data.data.code != 20000){
+              // alert(123)
+              this.$message({
+            type: "error",
+            message: response.data.message
+              });
+              return ;
+            }
+
+             //第二步 获取token字符串放到cookie里面
+             //第一个参数cookie名称，第二个参数值，第三个参数作用范围（每次请求都带上cookie，这个表示请求时cookie的传递范围）
+             cookie.set('guli_token',response.data.data.token,{domain: 'localhost'})
+             
+//第三步 看request.js里面的拦截器
+
+              //第四步 调用接口 根据token获取用户信息，为了首页面显示
+              loginApi.getMemberInfo()
+                .then(response => {
+                  this.loginInfo = response.data.data.memberInfo
+                  //获取返回用户信息，放到cookie里面
+                  cookie.set('guli_ucenter',this.loginInfo,{domain: 'localhost'})
+
+                  //跳转页面
+                  window.location.href = "/";
+                })
+           })
+      },
       checkPhone (rule, value, callback) {
         //debugger
         if (!(/^1[34578]\d{9}$/.test(value))) {

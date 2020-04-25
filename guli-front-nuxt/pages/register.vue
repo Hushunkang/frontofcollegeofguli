@@ -146,7 +146,8 @@ export default {
     timeDown() {
       let result = setInterval(() => {
         --this.second;
-        this.codeText = "验证码已发送，接收约需要" + this.second + "秒";
+        this.codeText = this.second + "秒后重新获取";
+        //注册的实现可以参照B站
         if (this.second < 1) {
           clearInterval(result);
           this.sending = true;
@@ -166,7 +167,7 @@ export default {
             message: response.data.message
           });
         } else {
-          //提示验证码发送成功
+          //失败
           this.$message({
             type: "error",
             message: response.data.message
