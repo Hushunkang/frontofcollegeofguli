@@ -58,7 +58,7 @@
 
              //有可能登录不成功，给前端响应
             //  debugger
-            if(response.data.data.code != 20000){
+            if(response.data.code != 20000){
               // alert(123)
               this.$message({
             type: "error",
@@ -70,7 +70,7 @@
              //第二步 获取token字符串放到cookie里面
              //第一个参数cookie名称，第二个参数值，第三个参数作用范围（每次请求都带上cookie，这个表示请求时cookie的传递范围）
              cookie.set('guli_token',response.data.data.token,{domain: 'localhost'})
-             
+
 //第三步 看request.js里面的拦截器
 
               //第四步 调用接口 根据token获取用户信息，为了首页面显示
@@ -79,6 +79,11 @@
                   this.loginInfo = response.data.data.memberInfo
                   //获取返回用户信息，放到cookie里面
                   cookie.set('guli_ucenter',this.loginInfo,{domain: 'localhost'})
+                  //一个cookie其实有很多属性的，其中domain和path这两个属性，限制了请求某一个url，浏览器是否要发送这个cookie
+                  // document.cookie="username=John Doe";
+                  // cookie.set('name', 'value', { expires: 365 })
+                  // document.cookie = "name=huang";
+                  // document.cookie="age=12; expires=Thu, 26 Feb 2116 11:50:25 GMT; domain=localhost; path=/";
 
                   //跳转页面
                   window.location.href = "/";
