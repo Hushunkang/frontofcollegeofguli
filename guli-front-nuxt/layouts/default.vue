@@ -45,15 +45,16 @@
         <q class="red-point" style="display: none">&nbsp;</q>
     </li>
     <li v-if="loginInfo.id" id="is-login-two" class="h-r-user">
-        <a href="/ucenter" title>
+        <a href="#">
             <img
                  :src="loginInfo.avatar"
                  width="30"
                  height="30"
                  class="vam picImg"
                  alt
+                 title="会员头像"
                  >
-            <span id="userName" class="vam disIb">{{ loginInfo.nickname }}</span>
+            <span id="userName" class="vam disIb" title="会员昵称">{{ loginInfo.nickname }}</span>
         </a>
         <a href="javascript:void(0);" title="退出" @click="logout()" class="ml5">退出</a>
     </li>
@@ -138,6 +139,7 @@ import "~/assets/css/theme.css";
 import "~/assets/css/global.css";
 import "~/assets/css/web.css";
 import cookie from 'js-cookie'
+import loginApi from "@/api/login/login"
 
 export default {
   data() {
@@ -154,36 +156,42 @@ export default {
     }
   },
   created() {
-    //获取路径里面token值
-    // this.token = this.$route.query.token
-    // console.log(this.token)
-    // if(this.token) {//判断路径是否有token值
-    //    this.wxLogin()
-    // }
+    //微信扫码登录
+    //获取路径中的token值
+    this.token = this.$route.query.token;
+    console.log(this.token)
+    if(this.token){
+      this.wxLogin();
+    }
 
-    this.showInfo()
+    this.showInfo();
   },
   methods:{
-    // //微信登录显示的方法
-    // wxLogin() {
-    //   //console.log('************'+this.token)
-    //   //把token值放到cookie里面
-    //   cookie.set('guli_token',this.token,{domain: 'localhost'})
-    //   cookie.set('guli_ucenter','',{domain: 'localhost'})
-    //  //console.log('====='+cookie.get('guli_token'))
-    //   //调用接口，根据token值获取用户信息
-    //   loginApi.getLoginUserInfo()
-    //     .then(response => {
-    //       // console.log('################'+response.data.data.userInfo)
-    //        this.loginInfo = response.data.data.userInfo
-    //        cookie.set('guli_ucenter',this.loginInfo,{domain: 'localhost'})
-    //     })
-    // },
+    //微信扫码登录
+    wxLogin(){
+      //把token值放到cookie里面
+      cookie.set("guli_token",this.token,{domain: 'localhost'});//覆盖cookie
+      cookie.set("guli_ucenter",'',{domain: 'localhost'});
+      //调用接口，根据token获取用户信息，为了首页面显示
+
+      loginApi.getMemberInfo()
+                .then(response => {
+                  this.loginInfo = response.data.data.memberInfo
+
+                  //获取返回用户信息，放到cookie里面
+                  cookie.set('guli_ucenter',this.loginInfo,{domain: 'localhost'})
+                  //跳转页面
+                  window.location.href = "/";
+                })
+    },
 
     //创建方法，从cookie获取用户信息
     showInfo() {
       //从cookie获取用户信息
       var userStr = cookie.get('guli_ucenter')//注意从cookie中取到的值是json字符串，下一步需要转换为json对象
+
+      console.log('***************************aaa' + userStr);
+
       // 把json字符串转换json对象(js对象)
       if(userStr) {
         this.loginInfo = JSON.parse(userStr)

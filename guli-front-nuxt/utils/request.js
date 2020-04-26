@@ -15,7 +15,7 @@ service.interceptors.request.use(//表示每次axios发送ajax请求都使用这
       //debugger
       //判断cookie里面是否存在名称为guli_token这样的数据，因为cookie的结构和map结构类似，都是键值对存放数据的
       if (cookie.get('guli_token')) {
-        config.headers['token'] = cookie.get('guli_token');
+        config.headers['token'] = cookie.get('guli_token');//请求后端的url时候在请求头里面添加token
       }
         return config
       },
