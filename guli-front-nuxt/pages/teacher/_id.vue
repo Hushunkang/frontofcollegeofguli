@@ -82,7 +82,9 @@ import teacherApi from "@/api/teacher/teacher";
 export default {
 
   asyncData({ params, error }) {
-    return teacherApi.frontGetTeacherById(params.id)//params.id获取路径id值，此处就是teacher/index.vue里面<a :href="'/teacher/' + teacher.id"
+    return teacherApi.frontGetTeacherById(params.id)//params.id获取路径中的值，此处就是teacher/index.vue里面<a :href="'/teacher/' + teacher.id"
+    //为什么是params.id不是params.abc，原因是这个id和_id.vue一致，如果是_abc.vue这里要写params.abc才可以获取到路径中的值
+    //别人框架这么设计的，你遵守规范去使用它这个框架即可
       .then(response => {
         return {
           eduTeacher: response.data.data.eduTeacher,
