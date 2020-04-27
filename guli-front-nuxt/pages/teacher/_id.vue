@@ -60,11 +60,11 @@
                   <section class="course-img">
                     <img :src="course.cover" class="img-responsive" >
                     <div class="cc-mask">
-                      <a href="#" title="开始学习" target="_blank" class="comm-btn c-btn-1">开始学习</a>
+                      <a :href="'/course/'+course.id" title="开始学习" target="_self" class="comm-btn c-btn-1">开始学习</a>
                     </div>
                   </section>
                   <h3 class="hLh30 txtOf mt10">
-                    <a href="#" :title="course.title" target="_blank" class="course-title fsize18 c-333">{{course.title}}</a>
+                    <a :href="'/course/'+course.id" :title="course.title" target="_self" class="course-title fsize18 c-333">{{course.title}}</a>
                   </h3>
                 </div>
               </li>
