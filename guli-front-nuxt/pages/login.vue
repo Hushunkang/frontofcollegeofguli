@@ -85,7 +85,7 @@
                   // document.cookie = "name=huang";
                   // document.cookie="age=12; expires=Thu, 26 Feb 2116 11:50:25 GMT; domain=localhost; path=/";
 
-                  //跳转页面
+                  //跳转到首页面
                   window.location.href = "/";
                 })
            })

@@ -159,7 +159,7 @@ export default {
     //微信扫码登录
     //获取路径中的token值
     this.token = this.$route.query.token;
-    console.log(this.token)
+    // console.log(this.token)
     if(this.token){
       this.wxLogin();
     }
@@ -190,7 +190,7 @@ export default {
       //从cookie获取用户信息
       var userStr = cookie.get('guli_ucenter')//注意从cookie中取到的值是json字符串，下一步需要转换为json对象
 
-      console.log('***************************aaa' + userStr);
+      // console.log('***************************aaa' + userStr);
 
       // 把json字符串转换json对象(js对象)
       if(userStr) {
