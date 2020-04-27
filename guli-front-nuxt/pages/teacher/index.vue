@@ -26,15 +26,15 @@
               <li v-for="teacher in data.records" :key="teacher.id">
                 <section class="i-teach-wrap">
                   <div class="i-teach-pic">
-                    <a href="/teacher/1" :title="teacher.name" target="_blank">
+                    <a :href="'/teacher/' + teacher.id" :title="teacher.name" target="_self">
                       <img :src="teacher.avatar" :alt="teacher.name" />
                     </a>
                   </div>
                   <div class="mt10 hLh30 txtOf tac">
                     <a
-                      href="/teacher/1"
+                      :href="'/teacher/' + teacher.id"
                       :title="teacher.name"
-                      target="_blank"
+                      target="_self"
                       class="fsize18 c-666"
                     >{{teacher.name}}</a>
                   </div>
@@ -107,11 +107,12 @@ export default {
   //异步调用，只会调用一次
   //params: 相当于之前 this.$route.params.id  等价  params.id
   asyncData({ params, error }) {
-    return teacherApi.pageTeacher(1, 4).then(response => {
+    return teacherApi.frontPageTeacher(1, 4).then(response => {
       // console.log("response" + response);
 
       // console.log("response.data.data" + response.data.data);
 
+      //遍历出一个js对象的所有属性的信息 var obj = {k1:v1,k2:v2};
       // var msg ="";
       //             for(var name in response.data.data){
       //                 msg += name+": "+ response.data.data[name]+"\r\n ";
@@ -126,7 +127,7 @@ export default {
     //由于没有使用element-ui分页组件，分页自己手撸
     //分页切换的方法
     goToPage(page) {
-      teacherApi.pageTeacher(page, 4).then(response => {
+      teacherApi.frontPageTeacher(page, 4).then(response => {
         this.data = response.data.data.result; //前端return data:在当前vue页面定义了一个变量为data
       });
     }

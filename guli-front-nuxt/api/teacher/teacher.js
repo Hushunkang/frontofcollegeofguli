@@ -1,16 +1,16 @@
 import request from '@/utils/request'//引入utils目录下面的request.js文件
 export default {
     //分页查询讲师数据
-    pageTeacher(current,size) {
+    frontPageTeacher(current,size) {
         return request({
-            url: `/eduservice/frontteacher/pageTeacher/${current}/${size}`,
+            url: `/eduservice/frontteacher/frontPageTeacher/${current}/${size}`,
             method: 'get'
         })
     },
-    //根据token获取会员信息
-    getMemberInfo(){
+    //讲师详情
+    frontGetTeacherById(teacherId){
         return request({
-            url: '/ucenterservice/member/getMemberInfo',
+            url: '/eduservice/frontteacher/frontGetTeacherById/' + teacherId,
             method: 'get'
         })
     }
