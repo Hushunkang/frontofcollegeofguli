@@ -155,7 +155,7 @@ export default {
         }
     }
   },
-  created() {
+  created() {//created方法是vue生命周期里面的一个方法，表示页面渲染之前执行的方法
     //微信扫码登录
     //获取路径中的token值
     this.token = this.$route.query.token;

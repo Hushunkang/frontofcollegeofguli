@@ -19,9 +19,9 @@ export function getInfo(token) {
   })
 }
 
-export function logout() {
+export function LogOut() {
   return request({
-    url: '/user/logout',
+    url: '/eduservice/user/logout',
     method: 'post'
   })
 }

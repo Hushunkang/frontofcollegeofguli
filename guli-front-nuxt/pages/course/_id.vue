@@ -88,6 +88,12 @@
                       <p v-html="frontCourseDetailVo.description"><!-- v-html表示将你的html标签里面的内容带有html标签的翻译过来，显现出html应该有的效果而不是原样输出 -->
                         {{frontCourseDetailVo.description}}
                       </p>
+                      <!-- 
+                        todo 前端显示不出emoji表情，看console的提示说404找不到http://localhost:3000/course/static/tinymce4.7.5/plugins/emoticons/img/smiley-cool.gif 404 (Not Found)
+                        如何写前端的代码，让它找的到呢
+                        下面这两行代码试过，第一行找得到，第二行找不到，到底该咋解决，目前还没有想到办法
+                        <p><img src="~/static/tinymce4.7.5/plugins/emoticons/img/smiley-cool.gif" alt="cool"/></p>
+                      <p><img src="http://localhost:3000/static/tinymce4.7.5/plugins/emoticons/img/smiley-cool.gif" alt="cool"/></p> -->
                     </section>
                   </div>
                 </div>
@@ -137,12 +143,12 @@
                 <ul style="height: auto;">
                   <li>
                     <div class="u-face">
-                      <a href="#">
+                      <a :href="'/teacher/'+frontCourseDetailVo.teacherId">
                         <img :src="frontCourseDetailVo.avatar" width="50" height="50" :alt="frontCourseDetailVo.teacherName">
                       </a>
                     </div>
                     <section class="hLh30 txtOf">
-                      <a class="c-333 fsize16 fl" href="#">{{frontCourseDetailVo.teacherName}}</a>
+                      <a class="c-333 fsize16 fl" :href="'/teacher/'+frontCourseDetailVo.teacherId">{{frontCourseDetailVo.teacherName}}</a>
                     </section>
                     <section class="hLh20 txtOf">
                       <span class="c-999">{{frontCourseDetailVo.intro}}</span>
